@@ -26,8 +26,9 @@ app.post('/clover', async (req, res) => {
 
   if (p.verificationCode) {
     console.log('CLOVER VERIFICATION CODE:', p.verificationCode);
-    await relay({ verify: p.verificationCode }).catch(() => {});
-    return res.json({ verificationCode: p.verificationCode });
+    res.json({ verificationCode: p.verificationCode });
+    relay({ verify: p.verificationCode }).catch(() => {});
+    return;
   }
 
   res.json({ ok: true });
